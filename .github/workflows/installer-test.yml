@@ -1,0 +1,38 @@
+name: Installer test (Arch Linux)
+on:
+  push:
+    branches: [installer-test]
+  workflow_dispatch: {}
+jobs:
+  arch:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Base system
+        run: pacman -Syu --noconfirm sudo curl git xorg-server-xvfb xorg-xauth which
+      - uses: actions/checkout@v4
+      - name: Normal user with sudo (like a desktop install)
+        run: |
+          useradd -m tester
+          echo 'tester ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/tester
+          cp install.sh /home/tester/install.sh && chown tester /home/tester/install.sh
+      - name: Run the installer
+        run: sudo -u tester -H bash -c 'bash ~/install.sh'
+      - name: Installed files
+        run: |
+          sudo -u tester -H bash -c 'ls -la ~/.local/bin ~/.local/share/stardust ~/.local/share/icons/hicolor/512x512/apps; cat ~/.local/share/applications/stardust.desktop'
+      - name: Launch Stardust (headless server mode, loads the native decryptor)
+        run: |
+          # containers have no /dev/fuse and no user namespaces
+          sudo -u tester -H bash -c 'export APPIMAGE_EXTRACT_AND_RUN=1; nohup xvfb-run -a ~/.local/bin/stardust --server --no-sandbox > ~/run.log 2>&1 &'
+          ok=0
+          for i in $(seq 1 60); do
+            if curl -fs http://127.0.0.1:10069/about; then echo; echo "LAUNCH_OK"; ok=1; break; fi
+            sleep 3
+          done
+          tail -40 /home/tester/run.log || true
+          [ "$ok" = 1 ]
+      - name: Uninstall
+        run: |
+          sudo -u tester -H bash -c 'bash ~/install.sh --uninstall'
+          sudo -u tester -H bash -c 'test ! -e ~/.local/share/stardust/Stardust.AppImage && test ! -e ~/.local/bin/stardust && echo UNINSTALL_OK'
