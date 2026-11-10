@@ -7,7 +7,7 @@
 
 <p align="center">
   A Nothing-styled Deezer client for <b>macOS</b>, <b>Windows</b>, <b>Linux</b> and <b>Android</b> (with Android Auto),<br>
-  built on <a href="https://github.com/Sheathed/Saturn">Saturn</a>. Formerly Jupiter.
+  built on <a href="https://github.com/Sheathed/Saturn">Saturn</a>.
 </p>
 
 <p align="center">
