@@ -33,15 +33,11 @@ a better car experience and a proper offline mode.
 
 **macOS, Windows and Linux**
 - **Lossless playback that sticks** — fixed tracks silently dropping to MP3 320 when FLAC is selected
-- **Shuffle** button on playlists
-- **Earphone and AirPods controls on macOS**, plus Control Center's Now Playing with cover art; media keys on every platform
-- Instant full-screen player close, Last.fm sign-in in its own window
 - **Linux builds** (AppImage and .deb) that don't depend on your system's OpenSSL
 
 **Android**
 - **Android Auto redesign** — Home, Recents, Library and Downloads tabs, search and voice ("Hey Google, play … on Stardust"), cover art everywhere, and playback always moves to the car
-- **Offline mode like Deezer's** — switches on by itself when you lose signal; only downloaded music plays, the rest is greyed out
-- Red **downloaded** badges on tracks, albums and playlists, and a **Downloaded albums** list
+- **Offline mode** — switches on by itself when you lose signal; only downloaded music plays, the rest is greyed out
 - Music Assistant **auto-reconnect**, and casting that works on home Wi-Fi or over Tailscale
 
 ## Install
