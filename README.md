@@ -53,6 +53,15 @@ a better car experience and a proper offline mode.
 | Linux | `Stardust-v…-linux-x86_64.AppImage` or `-linux-amd64.deb` | AppImage: `chmod +x` and run (updates itself). The .deb is for Ubuntu, Debian, Mint and similar. |
 | Android | `Stardust-Android-v….apk` | Allow installs from your browser when asked. |
 
+**Linux in one command** (Arch, EndeavourOS, Manjaro, Ubuntu, Debian, Mint, Fedora, openSUSE) — installs the latest
+AppImage for your user, the libraries it needs, and an app-menu entry; Stardust then updates itself:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/elevensixtyfour/stardust-releases/main/install.sh | bash
+```
+
+To uninstall: `curl -fsSL https://raw.githubusercontent.com/elevensixtyfour/stardust-releases/main/install.sh | bash -s -- --uninstall`
+
 **Android Auto:** apps installed outside the Play Store are hidden until you enable them. In Android Auto's
 settings tap **Version** 10 times, then ⋮ → **Developer settings** → turn on **Unknown sources**.
 
